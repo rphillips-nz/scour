@@ -1,0 +1,9 @@
+body {
+	font-family: Inconsolata, sans-serif;
+}
+
+#results > div {
+	width: 30%;
+	float: left;
+	padding: 1%;
+}

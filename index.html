@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Scout</title>
+
+	<link href="http://fonts.googleapis.com/css?family=Ropa+Sans|Inconsolata" rel="stylesheet" type="text/css">
+
+	<!--
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
+	-->
+	<script src="scripts/angular.min.js"></script>
+	<script src="scripts/angular-resource.min.js"></script>
+	<script src="scripts/scout.js"></script>
+
+	<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body ng-app="scout" ng-controller="ScoutCtrl">
+
+	<h1>Scout</h1>
+
+	<form ng-submit="search()">
+		<input type="text" placeholder="search" id="search" autofocus ng-model="query" />
+		<input type="submit" />
+	</form>
+
+	<section id="results">
+		<div>
+			<h2>Google+</h2>
+			<ul><li ng-repeat="item in googlePlus">{{item.title}}</li></ul>
+		</div>
+		
+		<div>
+			<h2>Twitter</h2>
+			<ul><li ng-repeat="item in twitterItems">{{item.text}}</li></ul>
+		</div>
+
+		<div>
+			<h2>Facebook</h2>
+			<ul><li ng-repeat="item in facebookItems">{{item.message}}</li></ul>
+		</div>
+	</section>
+
+</body>
+
+</html>
+
