@@ -1,0 +1,58 @@
+body {
+	font-family: Inconsolata, sans-serif;
+}
+
+h1, h2 {
+	text-align: center;
+	color: #222;
+}
+
+h1 {
+	font: 800 64px/64px "Vollkorn";
+	text-transform: uppercase;
+	font-size: 1.5em;
+}
+
+h2 {
+	font-size: 2.5em;
+}
+
+#results > div {
+	width: 31%;
+	float: left;
+	padding: 1%;
+}
+
+#results ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+#results ul li {
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+	border-bottom: 1px dashed gray;
+	word-wrap: break-word;
+}
+
+.search-form {
+	text-align: center;
+	position: relative;
+}
+
+.search-form > input[type="text"] {
+	width: 50%;
+	height: 1em;
+	padding: 1em;
+	border-radius: 20px;
+	border: 1px solid #555;
+	outline: none;
+}
+
+.search-form > input[type="submit"] {
+	display: none;
+}
+
+.google-plus img {
+	max-width: 100%;
+}

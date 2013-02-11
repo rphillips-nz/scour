@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<title>Scout</title>
 
-	<link href="http://fonts.googleapis.com/css?family=Ropa+Sans|Inconsolata" rel="stylesheet" type="text/css">
+	<link href="http://fonts.googleapis.com/css?family=Vollkorn|Inconsolata" rel="stylesheet" type="text/css">
 
 	<!--
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
@@ -15,31 +15,39 @@
 	<script src="scripts/angular-resource.min.js"></script>
 	<script src="scripts/scout.js"></script>
 
-	<link href="style.css" rel="stylesheet" type="text/css">
+	<link href="css/elusive-webfont.css" rel="stylesheet" type="text/css">
+	<link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
 
 <body ng-app="scout" ng-controller="ScoutCtrl">
-
 	<h1>Scout</h1>
 
-	<form ng-submit="search()">
-		<input type="text" placeholder="search" id="search" autofocus ng-model="query" />
-		<input type="submit" />
+	<form ng-submit="search()" class="search-form">
+		<input type="text" placeholder="search" autofocus ng-model="query" />
+		<input type="submit" value=""/>
 	</form>
 
 	<section id="results">
 		<div>
-			<h2>Google+</h2>
-			<ul><li ng-repeat="item in googlePlus">{{item.title}}</li></ul>
+			<h2><i class="icon-googleplus"></i></h2>
+			<ul class="google-plus">
+				<li ng-repeat="item in googlePlus">
+					<h3 ng-hide="item.title == ''">{{item.title}}</h3>
+					<div ng-repeat="attachment in item.object.attachments">
+						{{attachment.content}}
+						<img ng-src="{{attachment.image.url}}" />
+					</div>
+				</li>
+			</ul>
 		</div>
 		
 		<div>
-			<h2>Twitter</h2>
+			<h2><i class="icon-twitter"></i></h2>
 			<ul><li ng-repeat="item in twitterItems">{{item.text}}</li></ul>
 		</div>
 
 		<div>
-			<h2>Facebook</h2>
+			<h2><i class="icon-facebook"></i></h2>
 			<ul><li ng-repeat="item in facebookItems">{{item.message}}</li></ul>
 		</div>
 	</section>
