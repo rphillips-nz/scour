@@ -31,12 +31,26 @@
 		<div>
 			<h2><i class="icon-googleplus"></i></h2>
 			<ul class="google-plus">
-				<li ng-repeat="item in googlePlus">
+				<li ng-repeat="item in googlePlus" class="item">
 					<h3 ng-hide="item.title == ''">{{item.title}}</h3>
-					<div ng-repeat="attachment in item.object.attachments">
-						{{attachment.content}}
+
+					<div ng-repeat="attachment in item.object.attachments" class="attachment">
 						<img ng-src="{{attachment.image.url}}" />
+						<div class="attachment-content">
+							<a ng-href="{{attachment.url}}" target="_blank">{{attachment.displayName}}</a>
+							<p>{{attachment.content}}</p>
+						</div>
+
+						<div style="clear:both;"></div> <!-- TODO remove hack... -->
 					</div>
+
+					<ul class="item-info">
+						<li>
+							<img ng-src="{{getGooglePlusActorImage(item.actor.image.url, 20)}}" />
+							<a ng-href="{{item.actor.url}}" target="_blank">{{item.actor.displayName}}</a>
+						</li>
+						<li class="date">{{item.updated | date}}</li>
+					</ul>
 				</li>
 			</ul>
 		</div>

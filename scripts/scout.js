@@ -26,6 +26,9 @@ function ScoutCtrl($scope, Facebook, Twitter, GooglePlus) {
 		GooglePlus.get({query: $scope.query}, function onSuccess(result) {
 			$scope.googlePlus = result.items;
 		});
-	}}
+	}};
 
+	$scope.getGooglePlusActorImage = function(url) {
+		return url.replace(/\?sz=50/i, '?sz=20');
+	};
 }

@@ -1,14 +1,17 @@
 body {
 	font-family: "Open Sans", sans-serif;
+	color: #222;
+	background-color: #f8f8f8;
 }
 
 h1, h2 {
 	text-align: center;
-	color: #222;
 }
 
 h1 {
 	font: 800 64px/64px "Vollkorn";
+	letter-spacing: 1em;
+	padding-left: 1em;
 	text-transform: uppercase;
 	font-size: 1.5em;
 }
@@ -17,20 +20,25 @@ h2 {
 	font-size: 2.5em;
 }
 
+h3 {
+	font-size: 1em;
+	font-weight: normal;
+}
+
 #results > div {
 	width: 31%;
 	float: left;
 	padding: 1%;
 }
 
-#results ul {
+ul {
 	list-style-type: none;
 	padding: 0;
 }
 
-#results ul li {
-	padding-bottom: 20px;
-	margin-bottom: 20px;
+.item {
+	padding-bottom: 1em;
+	margin-bottom: 1em;
 	border-bottom: 1px dashed gray;
 	word-wrap: break-word;
 }
@@ -53,6 +61,60 @@ h2 {
 	display: none;
 }
 
-.google-plus img {
-	max-width: 100%;
+.attachment-content {
+	max-width: 67%;
+	padding-left: 3%;
+}
+
+.attachment-content p {
+	margin: 5px 0 0 0;
+}
+
+.attachment img, .attachment-content {
+	float: left;
+}
+
+.attachment img {
+	width: 30%;
+}
+
+.item-info {
+	clear: both;
+	font-size: 0.5em;
+	padding: 1.5em 0 0 1.5em;
+	line-height: 2em;
+}
+
+.item-info img {
+	border-radius: 10px;
+	vertical-align: bottom;
+	width: 20px;
+	margin-right: 0.4em;
+}
+
+.item-info li {
+	display: inline;
+}
+
+.item-info .date {
+	color: #999;
+}
+
+.item-info li + li {
+	margin-left: 2em;
+}
+
+/*.item-info li + li:before {
+	content: " - ";
+	letter-spacing: 0.5em;
+	margin-left: 1em;
+}*/
+
+a:link, a:visited {
+	color: #1b86ff;
+	text-decoration: none;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
 }
