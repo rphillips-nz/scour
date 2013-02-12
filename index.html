@@ -57,12 +57,50 @@
 		
 		<div>
 			<h2><i class="icon-twitter"></i></h2>
-			<ul><li ng-repeat="item in twitterItems">{{item.text}}</li></ul>
+			<ul>
+				<li ng-repeat="item in twitterItems" class="item">
+					{{item.text}}
+				</li>
+			</ul>
 		</div>
 
 		<div>
 			<h2><i class="icon-facebook"></i></h2>
-			<ul><li ng-repeat="item in facebookItems">{{item.message}}</li></ul>
+			<ul class="facebook">
+				<li ng-repeat="item in facebookItems" class="item {{item.type}}">
+					<div class="height-limited">
+						<img ng-show="item.icon" ng-src="{{item.icon}}" class="facebook-icon" />
+						{{item.message}}
+					</div>
+
+					<div ng-show="item.type == 'photo'" class="attachment">
+						<img ng-src="{{item.picture}}" />
+						<div class="attachment-content height-limited">
+							{{item.caption}}
+						</div>
+					</div>
+
+					<div ng-show="item.type == 'link'" class="attachment">
+						<img ng-src="{{item.picture}}" />
+						<div class="attachment-content height-limited">
+							<a ng-href="{{item.link}}" target="_blank">{{item.name}}</a>
+							<p>{{item.description}}</p>
+						</div>
+					</div>
+
+					<div ng-show="item.type == 'video'" class="attachment">
+						<img ng-src="{{item.picture}}" />
+						<div class="attachment-content height-limited">
+							<a ng-href="{{item.link}}" target="_blank">{{item.caption}}</a>
+							<p>{{item.description}}</p>
+						</div>
+					</div>
+					<ul class="item-info">
+						<li><a ng-href="https://www.facebook.com/{{item.from.id}}" target="_blank">{{item.from.name}}</a></li>
+						<li class="date">{{item.updated_time | date}}</li>
+					</ul>
+				</li>
+			</ul>
 		</div>
 	</section>
 

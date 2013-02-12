@@ -68,14 +68,11 @@ ul {
 
 .attachment-content p {
 	margin: 5px 0 0 0;
+	font-size: 0.7em;
 }
 
 .attachment img, .attachment-content {
 	float: left;
-}
-
-.attachment img {
-	width: 30%;
 }
 
 .item-info {
@@ -104,12 +101,6 @@ ul {
 	margin-left: 2em;
 }
 
-/*.item-info li + li:before {
-	content: " - ";
-	letter-spacing: 0.5em;
-	margin-left: 1em;
-}*/
-
 a:link, a:visited {
 	color: #1b86ff;
 	text-decoration: none;
@@ -117,4 +108,34 @@ a:link, a:visited {
 
 a:hover, a:active {
 	text-decoration: underline;
+}
+
+
+/* Specific styles */
+
+.google-plus .attachment img {
+	max-width: 30%;
+}
+
+.facebook .attachment {
+	margin-top: 1em;
+}
+
+.facebook .item.photo .attachment img {
+	max-width: 100%;
+}
+
+.facebook .item {
+	line-height: 1em;
+}
+
+.height-limited {
+	line-height: 1.2em;
+	overflow: hidden;
+	max-height: 17.9em;
+}
+
+.facebook-icon {
+	vertical-align: middle;
+	padding-right: 0.5em;
 }
