@@ -1,4 +1,4 @@
-angular.module('scout', ['ngResource'])
+angular.module('scour', ['ngResource'])
 
 .factory('GooglePlus', ['$resource', function($resource) {
 	return $resource('https://www.googleapis.com/plus/v1/activities', {}, {get: {method: 'JSONP', params: {key: 'AIzaSyDfmmrGRX43dlB9jMiCjyN2Zv1toEq-ZXk', callback: 'JSON_CALLBACK'}}});
