@@ -31,16 +31,14 @@ h3 {
 	padding: 1%;
 }
 
+/* TODO style this*/
+.result-count {
+	display: none;
+}
+
 ul {
 	list-style-type: none;
 	padding: 0;
-}
-
-.item {
-	padding-bottom: 1em;
-	margin-bottom: 1em;
-	border-bottom: 1px dashed gray;
-	word-wrap: break-word;
 }
 
 .search-form {
@@ -61,6 +59,19 @@ ul {
 	display: none;
 }
 
+.item {
+	padding-bottom: 1em;
+	margin-bottom: 1em;
+	border-bottom: 1px dashed gray;
+	word-wrap: break-word;
+	line-height: 1.4em;
+}
+
+.height-limited {
+	overflow: hidden;
+	max-height: 17.9em;
+}
+
 .attachment-content {
 	max-width: 67%;
 	padding-left: 3%;
@@ -69,6 +80,10 @@ ul {
 .attachment-content p {
 	margin: 5px 0 0 0;
 	font-size: 0.7em;
+}
+
+.attachment img {
+	max-width: 30%;
 }
 
 .attachment img, .attachment-content {
@@ -83,10 +98,7 @@ ul {
 }
 
 .item-info img {
-	border-radius: 10px;
 	vertical-align: bottom;
-	width: 20px;
-	margin-right: 0.4em;
 }
 
 .item-info li {
@@ -113,29 +125,20 @@ a:hover, a:active {
 
 /* Specific styles */
 
-.google-plus .attachment img {
-	max-width: 30%;
+.google-plus .item-info img, .twitter .item-info img {
+	width: 20px;
+	border-radius: 10px;
+	margin-right: 0.4em;
+}
+
+.facebook .item-info img {
+	vertical-align: -17%;
 }
 
 .facebook .attachment {
 	margin-top: 1em;
 }
 
-.facebook .item.photo .attachment img {
-	max-width: 100%;
-}
-
-.facebook .item {
-	line-height: 1em;
-}
-
-.height-limited {
-	line-height: 1.2em;
-	overflow: hidden;
-	max-height: 17.9em;
-}
-
 .facebook-icon {
-	vertical-align: middle;
-	padding-right: 0.5em;
+	padding-right: 0.1em;
 }

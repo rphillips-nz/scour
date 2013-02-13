@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Scout</title>
+	<title>Scour</title>
 
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans|Vollkorn" rel="stylesheet" type="text/css">
 
@@ -11,6 +11,8 @@
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
 	-->
+	<script src="scripts/jquery-1.9.1.min.js"></script>
+	<script src="scripts/jquery.appear.js"></script>
 	<script src="scripts/angular.min.js"></script>
 	<script src="scripts/angular-resource.min.js"></script>
 	<script src="scripts/scout.js"></script>
@@ -20,7 +22,7 @@
 </head>
 
 <body ng-app="scout" ng-controller="ScoutCtrl">
-	<h1>Scout</h1>
+	<h1>Scour</h1>
 
 	<form ng-submit="search()" class="search-form">
 		<input type="text" placeholder="search" autofocus ng-model="query" />
@@ -29,16 +31,20 @@
 
 	<section id="results">
 		<div>
-			<h2><i class="icon-googleplus"></i></h2>
+			<h2>
+				<i class="icon-googleplus"></i>
+				<span class="result-count">{{googlePlus.items.length}}</span>
+			</h2>
+
 			<ul class="google-plus">
-				<li ng-repeat="item in googlePlus" class="item">
+				<li ng-repeat="item in googlePlus.items" class="item">
 					<h3 ng-hide="item.title == ''">{{item.title}}</h3>
 
 					<div ng-repeat="attachment in item.object.attachments" class="attachment">
 						<img ng-src="{{attachment.image.url}}" />
 						<div class="attachment-content">
 							<a ng-href="{{attachment.url}}" target="_blank">{{attachment.displayName}}</a>
-							<p>{{attachment.content}}</p>
+							<p class="height-limited">{{attachment.content}}</p>
 						</div>
 
 						<div style="clear:both;"></div> <!-- TODO remove hack... -->
@@ -52,24 +58,42 @@
 						<li class="date">{{item.updated | date}}</li>
 					</ul>
 				</li>
+
+				<li id="google-plus-end"></li>
 			</ul>
 		</div>
 		
 		<div>
-			<h2><i class="icon-twitter"></i></h2>
-			<ul>
-				<li ng-repeat="item in twitterItems" class="item">
+			<h2>
+				<i class="icon-twitter"></i>
+				<span class="result-count">{{twitter.items.length}}</span>
+			</h2>
+			<ul class="twitter">
+				<li ng-repeat="item in twitter.items" class="item">
 					{{item.text}}
+
+					<ul class="item-info">
+						<li>
+							<img ng-src="{{item.profile_image_url}}" />
+							<a ng-href="https://www.twitter.com/{{item.from_user}}" target="_blank">{{item.from_user}}</a>
+						</li>
+						<li class="date">{{item.created_at | date:'MMM, d h:mm a'}}</li>
+					</ul>
 				</li>
+
+				<li id="twitter-end"></li>
 			</ul>
 		</div>
 
 		<div>
-			<h2><i class="icon-facebook"></i></h2>
+			<h2>
+				<i class="icon-facebook"></i>
+				<span class="result-count">{{facebook.items.length}}</span>
+			</h2>
+
 			<ul class="facebook">
-				<li ng-repeat="item in facebookItems" class="item {{item.type}}">
+				<li ng-repeat="item in facebook.items" class="item {{item.type}}">
 					<div class="height-limited">
-						<img ng-show="item.icon" ng-src="{{item.icon}}" class="facebook-icon" />
 						{{item.message}}
 					</div>
 
@@ -98,8 +122,11 @@
 					<ul class="item-info">
 						<li><a ng-href="https://www.facebook.com/{{item.from.id}}" target="_blank">{{item.from.name}}</a></li>
 						<li class="date">{{item.updated_time | date}}</li>
+						<li ng-show="item.icon"><img ng-src="{{item.icon}}" class="facebook-icon" /></li>
 					</ul>
 				</li>
+
+				<li id="facebook-end"></li>
 			</ul>
 		</div>
 	</section>
