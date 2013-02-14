@@ -10,9 +10,9 @@ angular.module('scour', ['ngResource'])
 
 .factory('Facebook', ['$resource', function($resource) {
 	return $resource('https://graph.facebook.com/search', {}, {get: {method: 'JSONP', params: {q: '@q', type: 'post', limit: 10, callback: 'JSON_CALLBACK'}}});
-}]);
+}])
 
-function ScoutCtrl($scope, Facebook, Twitter, GooglePlus) {
+.controller('ScourCtrl', ['$scope', 'Facebook', 'Twitter', 'GooglePlus', function($scope, Facebook, Twitter, GooglePlus) {
 
 	var currentQuery = '';
 
@@ -22,7 +22,7 @@ function ScoutCtrl($scope, Facebook, Twitter, GooglePlus) {
 		clear: function() {
 			$scope.googlePlus.items = [];
 			$scope.googlePlus.searching = false;
-			$scope.googlePlus.nextPageToken = undefined;
+			$scope.googlePlus.nextToken = undefined;
 		},
 		feed: function () {
 			if (!$scope.googlePlus.searching && currentQuery != '') {
@@ -123,4 +123,4 @@ function ScoutCtrl($scope, Facebook, Twitter, GooglePlus) {
 		return typeof object[key] != 'undefined';
 	};
 
-}
+}]);
