@@ -127,6 +127,7 @@ a:hover, a:active {
 
 .google-plus .item-info img, .twitter .item-info img {
 	width: 20px;
+	height: 20px;
 	border-radius: 10px;
 	margin-right: 0.4em;
 }
@@ -141,4 +142,8 @@ a:hover, a:active {
 
 .facebook-icon {
 	padding-right: 0.1em;
+}
+
+.attachment-content.full-width {
+	max-width: 97%;
 }

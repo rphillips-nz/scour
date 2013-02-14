@@ -42,7 +42,7 @@
 
 					<div ng-repeat="attachment in item.object.attachments" class="attachment">
 						<img ng-src="{{attachment.image.url}}" />
-						<div class="attachment-content">
+						<div class="attachment-content" ng-class="{'full-width': !has('image', attachment)}">
 							<a ng-href="{{attachment.url}}" target="_blank">{{attachment.displayName}}</a>
 							<p class="height-limited">{{attachment.content}}</p>
 						</div>
