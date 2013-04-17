@@ -3,6 +3,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
 	<title>Scour</title>
 
 	<script src="scripts/jquery-1.9.1.min.js"></script>
@@ -14,9 +15,12 @@
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans|Vollkorn" rel="stylesheet" type="text/css">
 	<link href="css/elusive-webfont.css" rel="stylesheet" type="text/css">
 	<link href="css/style.css" rel="stylesheet" type="text/css">
+	<link href="images/favicon.png" rel="icon" type="image/png">
 </head>
 
 <body ng-app="scour" ng-controller="ScourCtrl">
+	<h1>Scour</h1>
+
 	<nav>
 		<ul>
 			<li><a href="/reddit-images"><i class="icon-picture"></i></a></li>
@@ -26,8 +30,6 @@
 			<li><a target="_blank" href="http://nz.linkedin.com/pub/ross-phillips/37/132/255"><i class="icon-linkedin"></i></a></li>
 		</ul>
 	</nav>
-
-	<h1>Scour</h1>
 
 	<form ng-submit="search()" class="search-form">
 		<input type="text" placeholder="search" autofocus ng-model="query" />
