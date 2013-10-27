@@ -32,7 +32,7 @@ angular.module('scour', ['ngResource', 'ngSanitize'])
 					$scope.googlePlus.nextToken = result.nextPageToken;
 					$scope.googlePlus.items = $scope.googlePlus.items.concat(result.items);
 
-					$timeout(function() { console.log('wtf');$scope.googlePlus.searching = false; }, 1000);
+					$timeout(function() { $scope.googlePlus.searching = false; }, 1000);
 				});
 			}
 		}
