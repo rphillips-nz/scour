@@ -3,33 +3,26 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
+	<!-- <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" /> -->
 	<title>Scour</title>
 
 	<script src="scripts/jquery-1.9.1.min.js"></script>
 	<script src="scripts/jquery.appear.js"></script>
+	<script src="scripts/underscore-min.js"></script>
 	<script src="scripts/angular.min.js"></script>
 	<script src="scripts/angular-resource.min.js"></script>
+	<script src="scripts/angular-sanitize.min.js"></script>
 	<script src="scripts/main.js"></script>
 
-	<link href="http://fonts.googleapis.com/css?family=Open+Sans|Vollkorn" rel="stylesheet" type="text/css">
-	<link href="css/elusive-webfont.css" rel="stylesheet" type="text/css">
+	<link href="http://fonts.googleapis.com/css?family=Vollkorn:300|Merriweather:400,700|Roboto:400" rel="stylesheet" type="text/css">
+	<link href="css/scour-fontello.css" rel="stylesheet" type="text/css">
+	<link href="css/animation.css" rel="stylesheet" type="text/css">
 	<link href="css/style.css" rel="stylesheet" type="text/css">
 	<link href="images/favicon.png" rel="icon" type="image/png">
 </head>
 
 <body ng-app="scour" ng-controller="ScourCtrl">
 	<h1>Scour</h1>
-
-	<nav>
-		<ul>
-			<li><a href="/reddit-images"><i class="icon-picture"></i></a></li>
-			<li><a class="current" href="/scour"><i class="icon-network"></i></a></li>
-			<li><a href="/portfolio"><i class="icon-home-alt"></i></a></li>
-			<li><a target="_blank" href="https://github.com/rphillips-nz"><i class="icon-github"></i></a></li>
-			<li><a target="_blank" href="http://nz.linkedin.com/pub/ross-phillips/37/132/255"><i class="icon-linkedin"></i></a></li>
-		</ul>
-	</nav>
 
 	<form ng-submit="search()" class="search-form">
 		<input type="text" placeholder="search" autofocus ng-model="query" />
@@ -38,10 +31,7 @@
 
 	<section id="results">
 		<div>
-			<h2>
-				<i class="icon-googleplus"></i>
-				<span class="result-count">{{googlePlus.items.length}}</span>
-			</h2>
+			<h2><i class="icon-googleplus"></i></h2>
 
 			<ul class="google-plus">
 				<li ng-repeat="item in googlePlus.items" class="item">
@@ -51,13 +41,13 @@
 						<img ng-src="{{attachment.image.url}}" />
 						<div class="attachment-content" ng-class="{'full-width': !has('image', attachment)}">
 							<a ng-href="{{attachment.url}}" target="_blank">{{attachment.displayName}}</a>
-							<p class="height-limited">{{attachment.content}}</p>
+							<p class="attachment-text height-limited">{{attachment.content}}</p>
 						</div>
 
 						<div style="clear:both;"></div> <!-- TODO remove hack... -->
 					</div>
 
-					<ul class="item-info">
+					<ul class="item-footer">
 						<li>
 							<img ng-src="{{getGooglePlusActorImage(item.actor.image.url, 20)}}" />
 							<a ng-href="{{item.actor.url}}" target="_blank">{{item.actor.displayName}}</a>
@@ -66,74 +56,31 @@
 					</ul>
 				</li>
 
-				<li id="google-plus-end"></li>
+				<li id="google-plus-end">
+					<p class="num-results">{{googlePlus.items.length}} results found</p>
+					<i class="icon-spin5 animate-spin" ng-show="googlePlus.searching"></i>
+				</li>
 			</ul>
 		</div>
 		
 		<div>
-			<h2>
-				<i class="icon-twitter"></i>
-				<span class="result-count">{{twitter.items.length}}</span>
-			</h2>
-			<ul class="twitter">
-				<li ng-repeat="item in twitter.items" class="item">
-					{{item.text}}
+			<h2><i class="icon-reddit"></i></h2>
+			<ul class="reddit">
+				<li ng-repeat="item in reddit.items" class="item">
+					<h3><a ng-href="{{item.data.url}}" target="_blank" ng-bind-html="item.data.title"></a></h3>
+					<p class="item-text" ng-if="item.data.selftext_html" ng-bind-html="unescape(item.data.selftext_html)"></p>
 
-					<ul class="item-info">
-						<li>
-							<img ng-src="{{item.profile_image_url}}" />
-							<a ng-href="https://www.twitter.com/{{item.from_user}}" target="_blank">{{item.from_user}}</a>
-						</li>
-						<li class="date">{{item.created_at | date:'MMM, d h:mm a'}}</li>
+					<ul class="item-footer">
+						<li><a ng-href="http://www.reddit.com/u/{{item.data.author}}" target="_blank"><i class="icon-user"></i> {{item.data.author}}</a></li>
+						<li><i class="icon-heart"></i> {{item.data.score}}</li>
+						<li><a ng-href="http://www.reddit.com{{item.data.permalink}}" target="_blank"><i class="icon-comment"></i>{{item.data.num_comments}}</a></li>
 					</ul>
 				</li>
 
-				<li id="twitter-end"></li>
-			</ul>
-		</div>
-
-		<div>
-			<h2>
-				<i class="icon-facebook"></i>
-				<span class="result-count">{{facebook.items.length}}</span>
-			</h2>
-
-			<ul class="facebook">
-				<li ng-repeat="item in facebook.items" class="item {{item.type}}">
-					<div class="height-limited">
-						{{item.message}}
-					</div>
-
-					<div ng-show="item.type == 'photo'" class="attachment">
-						<img ng-src="{{item.picture}}" />
-						<div class="attachment-content height-limited">
-							{{item.caption}}
-						</div>
-					</div>
-
-					<div ng-show="item.type == 'link'" class="attachment">
-						<img ng-src="{{item.picture}}" />
-						<div class="attachment-content height-limited">
-							<a ng-href="{{item.link}}" target="_blank">{{item.name}}</a>
-							<p>{{item.description}}</p>
-						</div>
-					</div>
-
-					<div ng-show="item.type == 'video'" class="attachment">
-						<img ng-src="{{item.picture}}" />
-						<div class="attachment-content height-limited">
-							<a ng-href="{{item.link}}" target="_blank">{{item.caption}}</a>
-							<p>{{item.description}}</p>
-						</div>
-					</div>
-					<ul class="item-info">
-						<li><a ng-href="https://www.facebook.com/{{item.from.id}}" target="_blank">{{item.from.name}}</a></li>
-						<li class="date">{{item.updated_time | date}}</li>
-						<li ng-show="item.icon"><img ng-src="{{item.icon}}" class="facebook-icon" /></li>
-					</ul>
+				<li id="reddit-end">
+					<p class="num-results">{{reddit.items.length}} results found</p>
+					<i class="icon-spin5 animate-spin" ng-show="reddit.searching"></i>
 				</li>
-
-				<li id="facebook-end"></li>
 			</ul>
 		</div>
 	</section>
