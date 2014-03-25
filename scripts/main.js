@@ -1,7 +1,7 @@
 angular.module('scour', ['ngResource', 'ngSanitize'])
 
 .factory('GooglePlus', ['$resource', function($resource) {
-	return $resource('https://www.googleapis.com/plus/v1/activities', {}, {get: {method: 'JSONP', params: {key: 'AIzaSyDfmmrGRX43dlB9jMiCjyN2Zv1toEq-ZXk', callback: 'JSON_CALLBACK'}}});
+	return $resource('https://www.googleapis.com/plus/v1/activities', {}, {get: {method: 'JSONP', params: {key: 'AIzaSyDfmmrGRX43dlB9jMiCjyN2Zv1toEq-ZXk', callback: 'JSON_CALLBACK', maxResults: 20}}});
 }])
 
 .factory('Reddit', ['$resource', function($resource) {
